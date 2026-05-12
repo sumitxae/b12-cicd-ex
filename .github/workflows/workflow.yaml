@@ -27,4 +27,4 @@ jobs:
 
       - name: Run Submission Script
         run: |
-          python submit.py
+          python run.py
