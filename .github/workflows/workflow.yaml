@@ -1,0 +1,30 @@
+name: B12 Submission
+
+on:
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+
+    env:
+      SIGNING_SECRET: ${{ secrets.SIGNING_SECRET }}
+      REPOSITORY_LINK: https://github.com/${{ github.repository }}
+      ACTION_RUN_LINK: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Submission Script
+        run: |
+          python submit.py
